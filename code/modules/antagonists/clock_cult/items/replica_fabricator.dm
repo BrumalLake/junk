@@ -37,29 +37,28 @@
 	else if(isopenturf(target))
 		fabricate_sheets(target, user)
 	else if(istype(target, /obj/structure/destructible/clockwork))
-		var/obj/structure/destructible/clockwork/C = target
-		if(!C.can_be_repaired)
-			to_chat(user, span_nzcrentr("You cannot repair [C]!"))
+		if(target.resistance_flags & UNFIXABLE)
+			to_chat(user, span_nzcrentr("You cannot repair [target]!"))
 			return
 		if(GLOB.clockcult_power < 200)
-			to_chat(user, span_nzcrentr("You need [200 - GLOB.clockcult_power]W more to repair the [C]..."))
+			to_chat(user, span_nzcrentr("You need [200 - GLOB.clockcult_power]W more to repair the [target]..."))
 			return
-		if(C.max_integrity == C.get_integrity())
-			to_chat(user, span_nzcrentr("\The [C] is already repaired!"))
+		if(target.max_integrity == target.get_integrity())
+			to_chat(user, span_nzcrentr("\The [target] is already repaired!"))
 			return
-		to_chat(user, span_nzcrentr("You begin repairing [C]..."))
+		to_chat(user, span_nzcrentr("You begin repairing [target]..."))
 		if(do_after(user, 60, target=target))
-			if(C.max_integrity == C.get_integrity())
-				to_chat(user, span_nzcrentr("\The [C] is already repaired!"))
+			if(target.max_integrity == target.get_integrity())
+				to_chat(user, span_nzcrentr("\The [target] is already repaired!"))
 				return
 			if(GLOB.clockcult_power < 200)
-				to_chat(user, span_nzcrentr("You need [200 - GLOB.clockcult_power]W more to repair the [C]..."))
+				to_chat(user, span_nzcrentr("You need [200 - GLOB.clockcult_power]W more to repair the [target]..."))
 				return
 			GLOB.clockcult_power -= 200
-			to_chat(user, span_nzcrentr("You repair some of the damage on \the [C]."))
-			C.repair_damage(clamp(C.get_integrity() + 15, 0, C.max_integrity))
+			to_chat(user, span_nzcrentr("You repair some of the damage on \the [target]."))
+			target.repair_damage(clamp(target.get_integrity() + 15, 0, target.max_integrity))
 		else
-			to_chat(user, span_nzcrentr("You fail to repair the damage of \the [C]..."))
+			to_chat(user, span_nzcrentr("You fail to repair the damage of \the [target]..."))
 
 /obj/item/clockwork/replica_fabricator/proc/fabricate_sheets(turf/target, mob/user)
 	var/sheets = FLOOR(clamp(GLOB.clockcult_power / BRASS_POWER_COST, 0, 50), 1)

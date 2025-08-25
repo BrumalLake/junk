@@ -16,7 +16,7 @@
 	var/overwrite_existing = FALSE
 
 /obj/item/stack/sticky_tape/afterattack(obj/item/I, mob/living/user, proximity_flag)
-	if (proximity_flag != 1)
+	if(proximity_flag != 1)
 		return
 
 	if(!istype(I))
@@ -91,10 +91,13 @@
 /obj/item/stack/sticky_tape/duct/afterattack_secondary(atom/interacting_with, mob/living/user, proximity_flag)
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	if (proximity_flag != 1)
+	if(!proximity_flag)
 		return
 
 	if(!object_repair_value)
+		return
+
+	if(interacting_with.resistance_flags & UNFIXABLE)
 		return
 
 	if(issilicon(interacting_with))

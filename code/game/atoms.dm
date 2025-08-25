@@ -139,7 +139,7 @@
 	/// Maximum damage that can be taken in a single hit
 	var/max_hit_damage = null
 
-	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF
+	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF | FREEZE_PROOF | UNFIXABLE
 
 	/// the datum handler for our contents - see create_storage() for creation method
 	var/datum/storage/atom_storage

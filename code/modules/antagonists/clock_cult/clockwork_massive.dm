@@ -16,12 +16,12 @@ GLOBAL_LIST_INIT(clockwork_portals, list())
 	its instability will cause one-way bluespace rifts to open across the station to the City of Cogs, so be prepared to defend it at all costs."
 	max_integrity = 1000
 	max_hit_damage = 25
+	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF | FREEZE_PROOF | UNFIXABLE
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "clockwork_gateway_components"
 	pixel_x = -32
 	pixel_y = -32
 	density = TRUE
-	can_be_repaired = FALSE
 	immune_to_servant_attacks = TRUE
 	layer = BELOW_MOB_LAYER
 
